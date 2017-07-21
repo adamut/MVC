@@ -23,7 +23,9 @@ public class DBManager {
 
     public static Connection getConnection() throws ClassNotFoundException, SQLException {
         registerDriver();
-        return DriverManager.getConnection(CONNECTION_STRING, DBProperties.USER, DBProperties.PASS);
+        Connection connection = DriverManager.getConnection(CONNECTION_STRING, DBProperties.USER, DBProperties.PASS);
+        connection.createStatement().execute("alter session set current_schema="+DBProperties.SCHEMA);
+        return connection;
     }
 
     public static boolean checkConnection(Connection connection) {

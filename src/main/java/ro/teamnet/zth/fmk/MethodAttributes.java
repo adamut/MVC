@@ -1,76 +1,82 @@
 package ro.teamnet.zth.fmk;
 
+import ro.teamnet.zth.fmk.domain.HttpMethod;
+
+import java.lang.reflect.Method;
+import java.util.Arrays;
+
 /**
  * MethodAttributes.java
  */
 public class MethodAttributes {
 
-    String controllerClass;
-    String methodName;
-    String methodType;
+    private Class controllerClass;
+    private Method method;
+    private HttpMethod methodType;
+    private Class<?>[] parameterTypes;
 
-    public String getControllerClass() {
+    public Class getControllerClass() {
         return controllerClass;
     }
 
-    public void setControllerClass(String controllerClass) {
+    public void setControllerClass(Class controllerClass) {
         this.controllerClass = controllerClass;
     }
 
-    public String getMethodName() {
-        return methodName;
+    public Method getMethod() {
+        return method;
     }
 
-    public void setMethodName(String methodName) {
-        this.methodName = methodName;
+    public void setMethod(Method method) {
+        this.method = method;
     }
 
-    public String getMethodType() {
+    public HttpMethod getMethodType() {
         return methodType;
     }
 
-    public void setMethodType(String methodType) {
+    public void setMethodType(HttpMethod methodType) {
         this.methodType = methodType;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) return true;
+        if (!(o instanceof MethodAttributes)) return false;
 
         MethodAttributes that = (MethodAttributes) o;
 
-        if (controllerClass != null ? !controllerClass.equals(that.controllerClass) : that.controllerClass != null) {
-            return false;
-        }
-        if (methodType != null ? !methodName.equals(that.methodName) : that.methodName != null) {
-            return false;
-        }
-        if (methodType != null ? !methodType.equals(that.methodType) : that.methodType != null) {
-            return false;
-        }
-
-        return true;
+        if (!getControllerClass().equals(that.getControllerClass())) return false;
+        if (!getMethod().equals(that.getMethod())) return false;
+        if (getMethodType() != that.getMethodType()) return false;
+        // Probably incorrect - comparing Object[] arrays with Arrays.equals
+        return Arrays.equals(getParameterTypes(), that.getParameterTypes());
     }
 
     @Override
     public int hashCode() {
-        int result = controllerClass != null ? controllerClass.hashCode() : 0;
-        result = 31 * result + (methodName != null ? methodName.hashCode() : 0);
-        result = 31 * result + (methodType != null ? methodType.hashCode() : 0);
+        int result = getControllerClass().hashCode();
+        result = 31 * result + getMethod().hashCode();
+        result = 31 * result + getMethodType().hashCode();
+        result = 31 * result + Arrays.hashCode(getParameterTypes());
         return result;
     }
 
     @Override
     public String toString() {
         return "MethodAttributes{" +
-                "controllerClass='" + controllerClass + '\'' +
-                ", methodName='" + methodName + '\'' +
-                ", methodType='" + methodType + '\'' +
+                "controllerClass=" + controllerClass +
+                ", method=" + method +
+                ", methodType=" + methodType +
+                ", parameterTypes=" + Arrays.toString(parameterTypes) +
                 '}';
+    }
+
+    public void setParameterTypes(Class<?>[] parameterTypes) {
+        this.parameterTypes = parameterTypes;
+    }
+
+    public Class<?>[] getParameterTypes() {
+        return parameterTypes;
     }
 }

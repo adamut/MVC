@@ -3,9 +3,6 @@ package ro.teamnet.zth.appl.domain;
 import ro.teamnet.zth.api.annotations.Column;
 import ro.teamnet.zth.api.annotations.Id;
 import ro.teamnet.zth.api.annotations.Table;
-import sun.reflect.CallerSensitive;
-
-import java.lang.annotation.Target;
 
 @Table(name = "departments")
 public class Department {

@@ -3,7 +3,6 @@ package ro.teamnet.zth.appl.dao;
 
 import ro.teamnet.zth.api.em.EntityManager;
 import ro.teamnet.zth.api.em.EntityManagerImpl;
-import ro.teamnet.zth.appl.domain.Job;
 import ro.teamnet.zth.appl.domain.Location;
 
 import java.util.List;
@@ -25,7 +24,6 @@ public class LocationDao {
     }
 
     public List<Location> getAllLocations() {
-        EntityManager entityManager = new EntityManagerImpl();
         return entityManager.findAll(Location.class);
     }
 

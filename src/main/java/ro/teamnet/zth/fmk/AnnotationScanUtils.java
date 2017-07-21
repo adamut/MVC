@@ -21,7 +21,7 @@ public class AnnotationScanUtils {
      * @throws ClassNotFoundException
      * @throws IOException
      */
-    public static Iterable<Class> getClasses(String packageName) throws ClassNotFoundException, IOException {
+    public static List<Class> getClasses(String packageName) throws ClassNotFoundException, IOException {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         String path = packageName.replace('.', '/');
         Enumeration<URL> resources = classLoader.getResources(path);

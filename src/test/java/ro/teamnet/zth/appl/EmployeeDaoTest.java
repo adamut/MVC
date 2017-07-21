@@ -64,6 +64,7 @@ public class EmployeeDaoTest {
         employee.setFirstName("fName_all");
         employee.setLastName("lName_all");
         employee.setJobId("AD_PRES");
+        employee.setHireDate(new java.sql.Date(new Date().getTime()));
         employee = employeeDao.insertEmployee(employee);
         List<Employee> newLoc = employeeDao.getAllEmployees();
 
